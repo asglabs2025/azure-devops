@@ -36,7 +36,7 @@ stages:
         azureSubscription: 'azure-devops-sp-new'   # <-- name of your federated service connection
         scriptType: 'ps'                           # Use PowerShell
         scriptLocation: 'scriptPath'
-        scriptPath: 'landing-zone/lz-deploy.ps1'
+        scriptPath: 'bicep/landing-zone/lz-deploy.ps1' # Path to your deployment script
       env:
         # These environment variables are available inside lz-deploy.ps1
         AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
