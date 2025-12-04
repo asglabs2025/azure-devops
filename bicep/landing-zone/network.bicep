@@ -7,6 +7,7 @@ param vnetName string                           // Name of the VNet
 param location string = resourceGroup().location // Region (defaults to RG location)
 param vnetAddressSpace string                   // CIDR block for the VNet (e.g. "10.10.0.0/16")
 param subnets array                             // Array of subnets (name + prefix)
+param rgName string                             // Resource group name for NSG to reference subnets
 
 // VNet resource
 resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
@@ -25,7 +26,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
         properties: {
           addressPrefix: s.prefix
           networkSecurityGroup: {
-            id: resourceId('Microsoft.Network/networkSecurityGroups', '${s.name}-nsg')
+            id: resourceId('Microsoft.Network/networkSecurityGroups', rgName, '${s.name}-nsg')
           }
         }
       }
