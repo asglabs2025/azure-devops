@@ -26,7 +26,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
         properties: {
           addressPrefix: s.prefix
           networkSecurityGroup: {
-            id: resourceId('Microsoft.Network/networkSecurityGroups', rgName, '${s.name}-nsg')
+            id: resourceId(rgName, 'Microsoft.Network/networkSecurityGroups', '${s.name}-nsg')
           }
         }
       }
