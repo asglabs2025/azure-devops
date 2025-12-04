@@ -1,6 +1,7 @@
 # Azure Bicep Infrastructure Repository
 
-This repository provides a modular structure for managing Azure deployments with [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/overview) and Azure DevOps pipelines.
+A modular setup for managing Azure deployments with [Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/overview) and Azure DevOps pipelines.  
+Pipelines are configured to trigger automatically on GitHub pushes for seamless automation.
 
 ---
 
