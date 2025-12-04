@@ -35,8 +35,8 @@ $rbacAssignments = @(
 Set-Location "$PSScriptRoot"
 
 # --- Write JSON files ---
-$rgTags     | ConvertTo-Json -Depth 3 -Compress | Out-File -Encoding utf8 rgTags.json
-$subnets    | ConvertTo-Json -Depth 3 -Compress | Out-File -Encoding utf8 subnets.json
+$rgTags          | ConvertTo-Json -Depth 3 -Compress | Out-File -Encoding utf8 rgTags.json
+$subnets         | ConvertTo-Json -Depth 3 -Compress | Out-File -Encoding utf8 subnets.json
 $rbacAssignments | ConvertTo-Json -Depth 3 -Compress | Out-File -Encoding utf8 rbac.json
 # If you later enable policyAssignments, do the same:
 # $policyAssignments | ConvertTo-Json -Depth 3 -Compress | Out-File -Encoding utf8 policy.json
@@ -48,7 +48,7 @@ az deployment sub create `
   --template-file ./rg.bicep `
   --parameters rgName=$rgName location=$location rgTags=@rgTags.json
 
-# Network
+# Network (includes NSGs and rules via network.bicep)
 az deployment group create `
   --resource-group $rgName `
   --template-file ./network.bicep `
