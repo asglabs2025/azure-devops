@@ -52,7 +52,7 @@ az deployment sub create `
 az deployment group create `
   --resource-group $rgName `
   --template-file ./network.bicep `
-  --parameters vnetName=$vnetName vnetAddressSpace=$vnetAddressSpace subnets=@subnets.json location=$location
+  --parameters vnetName=$vnetName vnetAddressSpace=$vnetAddressSpace subnets=@subnets.json location=$location rgName=$rgName
 
 # Observability
 az deployment group create `
