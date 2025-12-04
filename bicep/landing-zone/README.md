@@ -1,6 +1,6 @@
 # Azure DevOps Landing Zone Deployment (PowerShell + Bicep)
 
-This repository contains an **Azure Landing Zone deployment pipeline** built with **Azure DevOps**, **PowerShell**, and **Bicep**. It provisions a complete landing zone environment including networking, observability, security, RBAC, and policy enforcement.
+This repository contains an **Azure Landing Zone deployment pipeline** built with **Azure DevOps**, **PowerShell**, and **Bicep**. It provisions a complete landing zone environment including networking, observability, security, RBAC, and policy enforcement. Authentication is handled by a **Service Connection** with federated credentials.
 
 ---
 

@@ -9,6 +9,8 @@ trigger:
 
 pool:
   name: 'WinServer'   # Use your self-hosted Windows Agent pool
+  # For Microsoft-hosted agents, replace with:
+  # vmImage: 'windows-latest'
 
 variables:
   # These values are passed into lz-deploy.ps1 via environment variables
