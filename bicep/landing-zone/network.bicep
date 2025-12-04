@@ -36,7 +36,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
 
 // Create NSGs for each subnet
 resource nsgs 'Microsoft.Network/networkSecurityGroups@2023-05-01' = [for s in subnets: {
-  name: '${s.name}-nsg'
+  name: 'uks-lz-prod-${s.name}-nsg'
   location: location
   properties: {
     securityRules: [
