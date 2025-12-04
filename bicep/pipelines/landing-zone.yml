@@ -1,0 +1,42 @@
+# azure-pipelines.yml
+# This pipeline runs the lz-deploy.ps1 script to deploy your landing zone.
+# It uses an Azure Resource Manager service connection with federated credentials (no secrets stored).
+
+trigger:
+  branches:
+    include:
+      - main        # Run pipeline automatically when code is pushed to 'main'
+
+pool:
+  name: 'WinServer'   # Use your self-hosted Windows Agent pool
+
+variables:
+  # These values are passed into lz-deploy.ps1 via environment variables
+  AZURE_SUBSCRIPTION_ID: '33ee6327-5d9e-48af-b874-ccde3605cc3d'
+  AZURE_TENANT_ID: 'f986de44-42d0-4c33-b30e-984d2414a2a3'
+  AZURE_CLIENT_ID: 'ac1c1f36-e528-4148-bf5d-1a43c961baff'
+
+stages:
+- stage: Deploy
+  displayName: "Deploy Landing Zone"
+  jobs:
+  - job: DeployLandingZone
+    displayName: "Run lz-deploy.ps1"
+    steps:
+
+    # Step 1: Checkout your repository
+    - checkout: self
+
+    # Step 2: Run the PowerShell deployment script via AzureCLI task
+    - task: AzureCLI@2
+      displayName: "Run lz-deploy.ps1 with federated identity"
+      inputs:
+        azureSubscription: 'azure-devops-sp-new'   # <-- name of your federated service connection
+        scriptType: 'ps'                           # Use PowerShell
+        scriptLocation: 'scriptPath'
+        scriptPath: 'landing-zone/lz-deploy.ps1'
+      env:
+        # These environment variables are available inside lz-deploy.ps1
+        AZURE_SUBSCRIPTION_ID: $(AZURE_SUBSCRIPTION_ID)
+        AZURE_TENANT_ID: $(AZURE_TENANT_ID)
+        AZURE_CLIENT_ID: $(AZURE_CLIENT_ID)

@@ -1,0 +1,34 @@
+// network.bicep
+// This module creates a Virtual Network (VNet) with subnets.
+// All values (name, address space, subnets, location) are passed in from lz-deploy.ps1.
+
+// Parameters
+param vnetName string                          // Name of the VNet
+param location string = resourceGroup().location // Region (defaults to RG location)
+param vnetAddressSpace string                  // CIDR block for the VNet (e.g. "10.10.0.0/16")
+param subnets array                            // Array of subnets (name + prefix)
+
+// VNet resource
+resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
+  name: vnetName
+  location: location
+  properties: {
+    addressSpace: {
+      addressPrefixes: [
+        vnetAddressSpace
+      ]
+    }
+    // Loop through the subnets array passed in from lz-deploy.ps1
+    subnets: [
+      for s in subnets: {
+        name: s.name
+        properties: {
+          addressPrefix: s.prefix
+        }
+      }
+    ]
+  }
+}
+
+// Output the VNet ID so other modules or scripts can reference it
+output vnetId string = vnet.id
