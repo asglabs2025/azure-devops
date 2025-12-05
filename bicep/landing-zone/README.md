@@ -14,10 +14,7 @@ For lab purposes, a **custom role definition** was used with broad permissions. 
 - `Microsoft.KeyVault/*`
 - `Microsoft.Authorization/*`
 - `Microsoft.PolicyInsights/*`
-- `Microsoft.Authorization/policyDefinitions/*`
-- `Microsoft.Authorization/policyAssignments/*`
-- `Microsoft.Management/managementGroups/*`
-- `Microsoft.Resources/deployments/*`
+- `Microsoft.Management/*`
 
 In production, you should scope permissions more tightly to follow least‑privilege principles.
 
